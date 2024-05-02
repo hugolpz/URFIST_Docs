@@ -106,7 +106,7 @@ height: auto;
                         <div class="card-body">
                           <div class="video-container">
                             <div class="box">
-                              <iframe width="250" frameborder="0" scrolling="no" 
+                              <iframe width="100%" frameborder="0" scrolling="no" 
                               :src=" item.url">
                               Your browser does not support iframe tag.</iframe>
                             </div>
@@ -119,10 +119,10 @@ height: auto;
 
                       </div>
                       <div class="LanguageCardFooter" style="display: flex;">
-                        <a class="cta--IQ7M2" :href="'https://spreadthesign.com/fr.fr/search/?cls=2&last_open_id=&last_to_lang=&q='+item.word"
-                          style="display:inline-block;width:50%;">Spread The Sign</a>
-                        <a class="cta--IQ7M2" :href="'https://fr.wiktionary.org/wiki/'+item.word"
-                          style="display:inline-block;width:auto;">Wiktionnaire</a>
+                        <a class="cta--IQ7M2" :href="'https://commons.wikimedia.org/wiki/User:'+item.wmuser"
+                          style="display:inline-block;width:auto;">Wikimedia</a>
+                        <a class="cta--IQ7M2" :href="'https://sygefor.reseau-urfist.fr/#/training/archive?q=%7B%22participations.trainer.fullName%22:%22'+item.author+'%22%7D"
+                          style="display:inline-block;width:50%;">URFIST</a>
                       </div>
                     </div>
 
@@ -182,9 +182,9 @@ var prez = [
   { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.03.20_Libérez_avec_Bing_Image_creator.html" },
   { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.03.22_Wikidata_et_DBpedia.html" },
   { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.04.29 Valoriser_ses_recherches_sur_Wikipédia.html" },
-  { tags: ['commons'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./Commons/20204.01.23_Exploreur.html" },
-  { tags: ['commons'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./Commons/2023.12.21_Commons.html" },
-  { tags: ['commons'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./Commons/2024.04.24_Commons.html" },
+  { tags: ['commons'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./commons/20204.01.23_Exploreur.html" },
+  { tags: ['commons'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./commons/2023.12.21_Commons.html" },
+  { tags: ['commons'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./commons/2024.04.24_Commons.html" },
   { tags: ['wikimedia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./formateurs/2024.01.11_Formateurs.html" },
   { tags: ['wikidata'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./wikidata/2023.06 CasuHAL.html" },
   { tags: ['wikidata'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./wikidata/2023.11.29 Wikidata.html " },
@@ -200,7 +200,7 @@ var app=new Vue({
         items: prez.map(item => ({ 
           title: item.url.replace(/.+\//,'').replace(/(\.\/)?/,'').replace(/\d+\.? ?/g,'').replace(/_/g,' ').replace('\.html',''), 
           filename: item.url,
-          url : 'https://hugolpz.github.io/URFIST/Formations/'+item.url,
+          url : item.url,
           author: item.authors[0].split('/')[0],
           wmuser: item.authors[0].split('/')[1],
           date: item.url.split(' ')[0],
