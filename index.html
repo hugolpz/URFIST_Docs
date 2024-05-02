@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="js-focus-visible" data-js-focus-visible="" dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lexique de LSF pour des bibliothèques inclusive</title>
+  <link id="style-fonts" rel="stylesheet" href="css/fonts.css">
+  <link id="style-main" rel="stylesheet" href="css/style.css">
+</head>
+<style>
+.card {
+width: 300px;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 8px;
+margin: 20px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+padding: 10px 20px;
+background-color: #00A99D;
+color: #fff;
+border-top-left-radius: 8px;
+border-top-right-radius: 8px;
+}
+.card-header::first-letter {
+/* Uppercase the first letter of the first word */
+text-transform: uppercase;
+}
+.card-body {
+padding: 20px;
+}
+
+.video-container {
+height: auto;
+}
+
+.video-container video {
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: auto;
+  display: block;
+}
+</style>
+<body>
+
+
+  <div id="app">
+    <noscript>Please enable JavaScript to run this app</noscript>
+    <div id="root">
+      <div id="main" class="languages">
+        <main id="content" class="languages">
+          <div class="page languages-page">
+            <div class="page__wrapper">
+              <p class="ribon-message">Ce porfolio est en phase de test. Si nécessaire, vous êtes invité à <a class="link"
+                href="https://github.com/hugolpz/URFIST/issues/">signaler un problème</a> ou à <a class="link"
+                href="https://github.com/hugolpz/URFIST/#contribute">contribuer sur Github</a>.
+             </p>
+              <div class="top">
+                <h1 class="page-heading">Présentations des Wikimédiens en résidence <span class="count">({{ searchFilteredItems.length }})</span></h1>
+                <div class="text">
+                  <div class="inner">
+                    <p>Une présentation manque ? </p><a class="button outline rounded"
+                      href="https://github.com/hugolpz/URFIST">Déposez une prez .html sur github</a>
+                    <!-- SEARCH INPUT -->
+                    <div class="search sticky">
+                      <input type="text" placeholder="Filtrer / chercher" value="Bonjour" class="" v-model="search">
+                      <button type="button" class="text-button " style="padding: 0px;">
+                        <img src="assets/search.svg" title="" alt="icon">
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="language-sections" v-for="(author, index) in authors" :key="index">
+                <section class="launched">
+
+                  <div class="title-and-search">
+                    <!-- TITLE OF GROUP -->
+                    <h2 class="language-sections__heading">Présentations effectuées par {{authors[index]}} <span class="count">({{ searchFilteredItems.filter(item => (item.author==authors[index])).length }})</span></h2>
+                  </div>
+
+                  <!-- Descriptor -->
+                  <div class="page-text-content">
+                    <p
+                      v-if="searchFilteredItems.filter(item => (item.author==authors[index])).length > 0">
+                      <i>Vous pouvez filtrer ces résultats par mots clefs.</i></p>
+                    <p v-else>
+                      <i>Aucun mot de réponds à votre recherche, vous pouvez vous connecter en <a class="link"
+                          href="https://lingualibre.org/wiki/Special:RecordWizard">enregistrer</a> les mots qui vous manquent.</i>
+                    </p>
+
+                  </div>
+
+                  <div class="languages-page__language-cards">
+                    <!-- Component languageCard -->
+                    <div class="LanguageCard--NQpAM"
+                      v-for="item in searchFilteredItems.filter(item => (item.author==authors[index]))">
+                      <div class="LanguageCardContent--HJkVa">
+                        <!-- TITRES -->
+                        <h3 class="LanguageCardHeading--mV8ad">{{ item.title }}</h3>
+                          
+                        <div class="card-body">
+                          <div class="video-container">
+                            <div class="box">
+                              <iframe width="250" frameborder="0" scrolling="no" 
+                              :src=" item.url">
+                              Your browser does not support iframe tag.</iframe>
+                            </div>
+                          par <a :href="'https://commons.wikimedia.org/wiki/User:'+ encodeURIComponent(item.wmuser)">{{ item.author }}</a><!-- – Vidéo ${ i + 1 } sur ${ files.length } -->
+                          </div>
+                        </div>
+
+                        <!-- DATA TABLE -->
+
+
+                      </div>
+                      <div class="LanguageCardFooter" style="display: flex;">
+                        <a class="cta--IQ7M2" :href="'https://spreadthesign.com/fr.fr/search/?cls=2&last_open_id=&last_to_lang=&q='+item.word"
+                          style="display:inline-block;width:50%;">Spread The Sign</a>
+                        <a class="cta--IQ7M2" :href="'https://fr.wiktionary.org/wiki/'+item.word"
+                          style="display:inline-block;width:auto;">Wiktionnaire</a>
+                      </div>
+                    </div>
+
+                  </div>
+                </section>
+              </div>
+
+
+              <div class="footer"><div class="page-text-content">
+                <p>
+                  Données provenant de ISIS et LinguaLibre.org,
+                  Page web dérivée de <a class="link" href="https://commonvoice.mozilla.org/en/languages">Common Voice</a> (<a class="link"
+                    href="https://github.com/common-voice/common-voice/blob/main/LICENSE">MPL 2.0</a>). Adaptations de pages uniques VueJS par Yug (MPL). Ceci est un projet open source <a class="link"
+                    href="https://github.com/hugolpz/SignesDeBibliothèques">auquel vous pouvez contribuer</a> en utilisant de l'HTML, du CSS
+                  et du JS simples.</p>
+              </div>
+              
+              </div>
+
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+</body>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script>
+    // https://codepen.io/jcesar020/pen/wpbKoK?editors=1111
+// https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js
+// https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js
+
+/* ************************************************** */
+/* DATA ********************************************* */
+var prez = [
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.05 Initiation à Wikipédia - 1lib1ref - Cabanis.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.05 Initiation à Wikipédia - 1lib1ref.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.05 Initiation à Wikipédia - WIKIF.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.06 URFIST.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.07.29_Lingualibre.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.07.29_Lingualibre_SignIt.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.08.17_Lingualibre.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.08.18_Lingualibre_SignIt.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.09 Valoriser_ses_recherches_sur_Wikipédia.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.10.05 Valoriser_ses_recherches_sur_Wikipédia.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.10.19 Valoriser_ses_recherches_sur_Wikipédia.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.10.26 Valoriser_ses_recherches_sur_Wikipédia.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.10.31 Transformer_ses_publications_scientifiques_en_article_Wikipédia.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2023.11.02 Valoriser_ses_recherches_sur_Wikipédia.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.01.16a Initiation à Wikipédia - 1lib1ref Arsenal.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.01.18b Initiation à Wikipédia - 1lib1ref - Mediad'Oc.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.01_GLAM_Toulouse.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.02.22 Valoriser_ses_recherches_sur_Wikipédia.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.03.06_Transformer_mes_articles_scientifiques_Wikipédia.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.03.08_Wikipédia_et_la_recherche.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.03.20_Libérez_avec_Bing_Image_creator.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.03.22_Wikidata_et_DBpedia.html" },
+  { tags: ['wikipédia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./2024.04.29 Valoriser_ses_recherches_sur_Wikipédia.html" },
+  { tags: ['commons'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./Commons/20204.01.23_Exploreur.html" },
+  { tags: ['commons'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./Commons/2023.12.21_Commons.html" },
+  { tags: ['commons'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./Commons/2024.04.24_Commons.html" },
+  { tags: ['wikimedia'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./formateurs/2024.01.11_Formateurs.html" },
+  { tags: ['wikidata'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./wikidata/2023.06 CasuHAL.html" },
+  { tags: ['wikidata'], authors: ['Hugo Lopez/Hugo en résidence'], url: "./wikidata/2023.11.29 Wikidata.html " },
+  
+];
+
+/* ************************************************** */
+/* VUEJS ******************************************** */
+var app=new Vue({
+    el: "#main",
+    data: function() { 
+      return {
+        items: prez.map(item => ({ 
+          title: item.url.replace(/.+\//,'').replace(/(\.\/)?/,'').replace(/\d+\.? ?/g,'').replace(/_/g,' ').replace('\.html',''), 
+          filename: item.url,
+          url : 'https://hugolpz.github.io/URFIST/Formations/'+item.url,
+          author: item.authors[0].split('/')[0],
+          wmuser: item.authors[0].split('/')[1],
+          date: item.url.split(' ')[0],
+          tag:  item.tags[0] 
+        })),
+        search: '',
+        authors: [ 'Hugo Lopez' ],
+        urlParams: new URLSearchParams(window.location.search),
+      }
+    },
+    methods: {
+      async fetchUrlParams() {;
+        this.search = this.urlParams.get('search')||'';
+        this.enlighten = this.urlParams.get('enlighten')||'';
+      },
+    },
+    computed: {
+      searchFilteredItems: function(){
+              var self=this;
+
+              console.log('List:', this.items);
+
+              var filterItems= function(item){ 
+              console.log(item)
+                var matchWord = item.filename?item.filename.toLowerCase().indexOf(self.search.toLowerCase())>=0 : false;
+                return match = matchWord;
+              }
+
+              console.log('List filtered by search:', this.items.filter(filterItems));
+           return this.items.filter(filterItems);
+           //return this.language;
+        }
+      },
+      mounted() {
+        this.fetchUrlParams();
+      }
+});
+
+
+
+  </script>
+</html>
